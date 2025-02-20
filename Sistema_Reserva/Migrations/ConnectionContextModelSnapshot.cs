@@ -10,7 +10,7 @@ using Sistema_Reserva.Infra;
 
 namespace Sistema_Reserva.Migrations
 {
-    [DbContext(typeof(ConnectionContext))]
+    [DbContext(typeof(AppConnectionContext))]
     partial class ConnectionContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace Sistema_Reserva.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AttendeeCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
@@ -81,6 +84,9 @@ namespace Sistema_Reserva.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -102,12 +108,7 @@ namespace Sistema_Reserva.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RoomId");
 
                     b.ToTable("Users");
                 });
@@ -140,18 +141,6 @@ namespace Sistema_Reserva.Migrations
                     b.Navigation("Room");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Sistema_Reserva.Model.User", b =>
-                {
-                    b.HasOne("Sistema_Reserva.Model.Room", null)
-                        .WithMany("Users")
-                        .HasForeignKey("RoomId");
-                });
-
-            modelBuilder.Entity("Sistema_Reserva.Model.Room", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

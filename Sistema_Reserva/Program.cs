@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sistema_Reserva.Infra;
+using Sistema_Reserva.Repository.UsersRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +10,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<ConnectionContext>(options =>
+builder.Services.AddDbContext<AppConnectionContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
 
 var app = builder.Build();
 

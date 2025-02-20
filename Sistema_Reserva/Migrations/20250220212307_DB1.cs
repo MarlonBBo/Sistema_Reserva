@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sistema_Reserva.Migrations
 {
     /// <inheritdoc />
-    public partial class DB : Migration
+    public partial class DB1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,8 @@ namespace Sistema_Reserva.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,17 +31,11 @@ namespace Sistema_Reserva.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Rooms_RoomId",
-                        column: x => x.RoomId,
-                        principalTable: "Rooms",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +45,8 @@ namespace Sistema_Reserva.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: false)
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    AttendeeCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,11 +101,6 @@ namespace Sistema_Reserva.Migrations
                 name: "IX_Reserves_UserId",
                 table: "Reserves",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_RoomId",
-                table: "Users",
-                column: "RoomId");
         }
 
         /// <inheritdoc />
@@ -122,10 +113,10 @@ namespace Sistema_Reserva.Migrations
                 name: "Reserves");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "Users");
         }
     }
 }
