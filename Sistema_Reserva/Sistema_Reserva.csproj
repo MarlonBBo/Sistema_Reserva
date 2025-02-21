@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Service\MeetingService\" />
-    <Folder Include="Service\RoomService\" />
     <Folder Include="Service\ReserveService\" />
   </ItemGroup>
 

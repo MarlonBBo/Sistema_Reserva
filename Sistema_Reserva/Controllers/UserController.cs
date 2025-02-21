@@ -5,7 +5,7 @@ using Sistema_Reserva.Repository.UsersRepository;
 namespace Sistema_Reserva.Controllers
 {
     [ApiController]
-    [Route("/")]
+    [Route("/User")]
     public class UserController : ControllerBase
     {
 
