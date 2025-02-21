@@ -36,5 +36,13 @@ namespace Sistema_Reserva.Controllers
             var user = await _userRepository.DeleteUser(idUser);
             return Ok(user);
         }
+
+        [HttpGet("GetUsersById")]
+        public async Task<ActionResult<ResponseModel<List<User>>>> GetUsersById([FromQuery] List<int> idsUsers)
+        {
+            var users = await _userRepository.GetUsersById(idsUsers);
+            return Ok(users);
+        }
+
     }
 }
