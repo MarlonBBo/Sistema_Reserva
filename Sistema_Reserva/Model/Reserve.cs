@@ -5,10 +5,11 @@ namespace Sistema_Reserva.Model
     public class Reserve
     {
         public int Id { get; set; }
-        public User User { get; set; }
-        public Room Room { get; set; }
-        [Range(1, int.MaxValue, ErrorMessage = "A quantidade de participantes deve ser pelo menos 1.")]
+        public int RoomId { get; set; }
+        public int UserId { get; set; }
         public int AttendeeCount { get; set; }
 
+        public User User { get; set; }
+        public Room Room { get; set; }
     }
 }

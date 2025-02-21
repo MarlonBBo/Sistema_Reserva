@@ -7,6 +7,6 @@ namespace Sistema_Reserva.Repository.UsersRepository
         Task<ResponseModel<List<User>>> CreateUser(User createUser);
         Task<ResponseModel<List<User>>> DeleteUser(int idUser);
         Task<ResponseModel<List<User>>> ListUsers();
-        Task<ResponseModel<List<User>>> GetUsersById(List<int> idsUsers);
+        Task<List<User>> GetUsersById(List<int> idsUsers);
     }
 }

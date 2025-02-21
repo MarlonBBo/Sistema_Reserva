@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Sistema_Reserva.Infra;
+using Sistema_Reserva.Repository.ReservesRepository;
 using Sistema_Reserva.Repository.RoomsRepository;
 using Sistema_Reserva.Repository.UsersRepository;
+using Sistema_Reserva.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<AppConnectionContext>(options =>
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IReserveRepository, ReserveRepository>();
+builder.Services.AddScoped<ReserveService>();
 
 
 

@@ -70,10 +70,9 @@ namespace Sistema_Reserva.Repository.UsersRepository
             }
         }
 
-        public async Task<ResponseModel<List<User>>> GetUsersById(List<int> idsUsers)
+        public async Task<List<User>> GetUsersById(List<int> idsUsers)
         {
-            ResponseModel<List<User>> resposta = new ResponseModel<List<User>>();
-
+           
             try
             {
                 var users = await _context.Users.Where(user => idsUsers.Contains(user.Id)).ToListAsync();
@@ -82,21 +81,13 @@ namespace Sistema_Reserva.Repository.UsersRepository
 
                 bool saoIguais = idsUsers.OrderBy(id => id).SequenceEqual(returnedIds.OrderBy(id => id));
 
-                if (!saoIguais)
-                {
-                    resposta.Message = "Os IDs fornecidos não correspondem aos usuários encontrados no banco.";
-                    return resposta;
-                }
-
-                resposta.Data = users;
-                resposta.Message = "Lista de usuários com os ids passados";
-                return resposta;
+                return users;
 
             }
             catch (Exception ex)
             {
-                resposta.Message = ex.Message;
-                return resposta;
+                throw new Exception(ex.Message);
+                
             }
         }
 

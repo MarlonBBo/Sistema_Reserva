@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sistema_Reserva.Infra;
 
@@ -12,11 +11,9 @@ using Sistema_Reserva.Infra;
 namespace Sistema_Reserva.Migrations
 {
     [DbContext(typeof(AppConnectionContext))]
-    [Migration("20250220212307_DB1")]
-    partial class DB1
+    partial class AppConnectionContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
