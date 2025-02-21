@@ -32,17 +32,42 @@ namespace Sistema_Reserva.Repository.UsersRepository
                 response.Data = await _context.Users.ToListAsync();
                 response.Message = "Usuário Criado!";
                 return response;
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 response.Message = ex.Message;
                 return response;
             }
         }
 
-        public Task<ResponseModel<List<User>>> DeleteUser(int idUser)
+        public async Task<ResponseModel<List<User>>> DeleteUser(int idUser)
         {
-            throw new NotImplementedException();
+            ResponseModel<List<User>> resposta = new ResponseModel<List<User>>();
+
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == idUser);
+
+                if (user == null)
+                {
+                    resposta.Message = "Usuário não encontrado";
+                    return resposta;
+                }
+
+                _context.Remove(user);
+                await _context.SaveChangesAsync();
+
+                resposta.Data = await _context.Users.ToListAsync();
+                resposta.Message = "Usuário deletado com sucesso!";
+                return resposta;
+
+            }
+            catch (Exception ex)
+            {
+                resposta.Message = ex.Message;
+                return resposta;
+            }
         }
 
         public Task<ResponseModel<List<User>>> GetUsersById(List<int> idsUsers)

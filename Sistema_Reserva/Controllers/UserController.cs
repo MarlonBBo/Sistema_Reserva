@@ -29,5 +29,12 @@ namespace Sistema_Reserva.Controllers
             var users = await _userRepository.ListUsers();
             return Ok(users);
         }
+
+        [HttpDelete("DeleteUser/{idUser}")]
+        public async Task<ActionResult<ResponseModel<List<User>>>> DeleteUser(int idUser)
+        {
+            var user = await _userRepository.DeleteUser(idUser);
+            return Ok(user);
+        }
     }
 }
